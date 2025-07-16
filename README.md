@@ -27,15 +27,30 @@ interspecific competition:
 
 ![alt text](./images/SAA_LV.jpeg)
 
-
+<!-- 
 > [!TIP]
-> To run the stochastic version of the LV model, use 
+> How to run the stochastic version of the LV model?
 ```ruby
    from stochasticLV import *
-   test = SAA(N1, N2, r1, r2, a12, a21, K)
+   test = SAA(N1_0, N2_0, r1, r2, α12, α21, k)
+   test.simulate(time)
+   output = pd.DataFrame.from_dict(test.init_cond)
+``` -->
+
+<details>
+
+<summary>[!TIP]
+</summary>
+
+To run the stochastic version of the LV model:
+```ruby
+   from stochasticLV import *
+   test = SAA(N1_0, N2_0, r1, r2, α12, α21, k)
    test.simulate(time)
    output = pd.DataFrame.from_dict(test.init_cond)
 ```
+
+</details>
 
 
 The stochastic version of the LV model addresses the lack of _stochasticity_, specifically
