@@ -39,10 +39,9 @@ interspecific competition:
 
 <details>
 
-<summary>[!TIP]
+<summary> >[!TIP]
 </summary>
 
-To run the stochastic version of the LV model:
 ```ruby
    from stochasticLV import *
    test = SAA(N1_0, N2_0, r1, r2, α12, α21, k)
