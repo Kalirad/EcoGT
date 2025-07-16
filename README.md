@@ -27,21 +27,8 @@ interspecific competition:
 
 ![alt text](./images/SAA_LV.jpeg)
 
-<!-- 
-> [!TIP]
+> [!IMPORTANT]
 > How to run the stochastic version of the LV model?
-```ruby
-   from stochasticLV import *
-   test = SAA(N1_0, N2_0, r1, r2, α12, α21, k)
-   test.simulate(time)
-   output = pd.DataFrame.from_dict(test.init_cond)
-``` -->
-
-<details>
-
-<summary> How to run the stochastic version of the LV model?
-</summary>
-
 ```ruby
    from stochasticLV import *
    test = SAA(N1_0, N2_0, r1, r2, α12, α21, k)
@@ -49,7 +36,6 @@ interspecific competition:
    output = pd.DataFrame.from_dict(test.init_cond)
 ```
 
-</details>
 
 
 The stochastic version of the LV model addresses the lack of _stochasticity_, specifically
@@ -81,6 +67,14 @@ well-mixed - in the sense of all-to-all interactions - and it does:
 
 ![alt text](./images/comp_graph.jpeg)
 
+> [!IMPORTANT]
+> How to run EcoGT on a complete graph?
+```ruby
+   from EcoGT_methods import *
+   p0, p1, fB = SC_on_comp_graph(N, t, alpha = {"A":α12, "B":α21})
+```
+
+
 In this single simulation of EcoGT on a complete graph with $N=50$ nodes and $\alpha_{12} =
 \alpha_{21} = 0.5$. 
 
@@ -90,6 +84,10 @@ this node. In an unweighted graph, the temperature  of node $i$ would be identic
 i.e., $T_i = k_i$, with hot nodes corresponding to nodes with higher degree. In a complete graph --
 where all the possible edges between any two nodes are created -- all the nodes have the same
 temperature.
+
+
+
+
 
 The effect of space on ecological competition can be more clearly illustrated using unrealistic
 topologies. For example, competition on a **dodecahedron**, with 20 nodes and 30 edges, where each node
