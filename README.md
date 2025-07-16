@@ -39,7 +39,7 @@ interspecific competition:
 
 <details>
 
-<summary> >[!TIP]
+<summary> How to run the stochastic version of the LV model?
 </summary>
 
 ```ruby
