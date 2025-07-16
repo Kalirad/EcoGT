@@ -27,6 +27,17 @@ interspecific competition:
 
 ![alt text](./images/SAA_LV.jpeg)
 
+
+> [!TIP]
+> To run the stochastic version of the LV model, use 
+```ruby
+   from stochasticLV import *
+   test = SAA(N1, N2, r1, r2, a12, a21, K)
+   test.simulate(time)
+   output = pd.DataFrame.from_dict(test.init_cond)
+```
+
+
 The stochastic version of the LV model addresses the lack of _stochasticity_, specifically
 _demographic stochasticity_, but does not include the effect space on competition.
 
@@ -82,5 +93,24 @@ king's graph with $\alpha_{12} =
 ![alt text](./images/kings_graph.jpeg)
 
 Although the topologies above can hardly be described as biologically relevant, they
-provide pedagogical clarity. More realistic topologies can be constructed using some of the most
-widely used models to construct network topologies.
+provide pedagogical clarity. 
+
+More realistic topologies can be constructed using some of the most
+widely used models to construct network topologies:
+
+<details>
+
+<summary>Erdős–Rényi model
+</summary>
+
+### You can add a header
+
+You can add text within a collapsed section.
+
+You can add an image or a code block, too.
+
+```ruby
+   puts "Hello World"
+```
+
+</details>
