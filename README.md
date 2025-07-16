@@ -6,9 +6,9 @@ Lotka–Volterra (LV) equations remains the most widely used and analyzed approa
 question of ecological coexistence. The classic LV competition model for two species can be
 formulated as
 
-$ \frac{dN_1}{dt} = r_1 N_1 (1 - \frac{N_1 + \alpha_{12} N_2}{K_1})$ 
+$\frac{dN_1}{dt} = r_1 N_1 (1 - \frac{N_1 + \alpha_{12} N_2}{K_1})$ 
 
-$ \frac{dN_2}{dt} = r_2 N_2 (1 - \frac{N_2 + \alpha_{21} N_1}{K_2}) \quad ,$
+$\frac{dN_2}{dt} = r_2 N_2 (1 - \frac{N_2 + \alpha_{21} N_1}{K_2}) \quad ,$
 
 where $r_i$ is the growth rate of species $i$, $K$ is the carrying capacity, and $\alpha_{ij}$ is
 the effect of species $j$ on species $i$. Being deterministic, this version of the LV model lacks
