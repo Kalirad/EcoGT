@@ -68,7 +68,7 @@ well-mixed - in the sense of all-to-all interactions - and it does:
 ![alt text](./images/comp_graph.jpeg)
 
 > [!IMPORTANT]
-> How to run EcoGT on a complete graph?
+> How to run species competition on a complete graph?
 ```ruby
    from EcoGT_methods import *
    p0, p1, fB = SC_on_comp_graph(N, t, alpha = {"A":α12, "B":α21})
@@ -96,6 +96,13 @@ is connected to three nodes, results in ecological drift when $\alpha_{12} =
 \alpha_{21} = 0.5$):
 
 ![alt text](./images/dodec.jpeg)
+> [!IMPORTANT]
+> How to run species competition on a dodecahedron?
+```ruby
+   from EcoGT_methods import *
+   p0, p1, fB = SC_on_dodec_graph(t, alpha = {"A":α12, "B":α21})
+```
+
 
 A **king's graph**, which represents the legal moves of the King piece on a
 chessboard, provides another illuminating example. Below is a simulation of species competition on a
@@ -103,26 +110,171 @@ king's graph with $\alpha_{12} =
 \alpha_{21} = 0.5$:
 
 ![alt text](./images/kings_graph.jpeg)
+> [!IMPORTANT]
+> How to run species competition on a King's graph?
+```ruby
+   from EcoGT_methods import *
+   p0, p1, fB = SC_on_kings_graph(N, p, t, alpha = {"A":α12, "B":α21})
+```
+> $p$ is the probability of edge creation, with $p=1$ resulting in a king's graph with $N^2$ nodes and
+> $4N^2 - 6N + 2$.
+
 
 Although the topologies above can hardly be described as biologically relevant, they
 provide pedagogical clarity. 
 
 More realistic topologies can be constructed using some of the most
-widely used models to construct network topologies:
+widely used models to construct network topologies.
 
-<details>
+### Erdős–Rényi (ER) model
 
-<summary>Erdős–Rényi model
-</summary>
+> [!NOTE]
+> Random graphs created using the ER model can be created by either randomly placing $L$ edges
+> among $N$ nodes or connecting any two nodes with probability $p$. We use the latter approach here.
 
-### You can add a header
 
-You can add text within a collapsed section.
-
-You can add an image or a code block, too.
-
+![alt text](./images/ER_graph.jpeg)
+> [!IMPORTANT]
+> How to run species competition on a random graph?
 ```ruby
-   puts "Hello World"
+   from EcoGT_methods import *
+   p0, p1, fB = SC_on_ER_graph(N, p, t, alpha = {"A":α12, "B":α21})
+```
+> $p$ is the probability of edge creation.
+
+### Small-world graphs
+
+To generate a graph with small-world properties (networks in which any pair of nodes are rarely connected by a single edge but can nevertheless be reach by
+traversing only a handful of edges), we used the model
+introduced by Newman and Watts, usually referred to as the Newman–Watts–Strogatz (NWS) model. A NWS graph is specified by three parameters: the number of nodes ($N$),
+connected neighbor in a ring topology ($k$), and the probability of new edges connecting a pair of
+nodes ($p$). In the classic Watts-Strogatz (WS) model, at first nodes are
+connected to $k$ neighbors and then some of these edges are rewired to create shortcuts, whereas in
+the NWS model, instead of rewiring existing edges, new edges are added to create shortcuts.
+Consequently, the NWS model does not result in disconnected nodes.
+
+![alt text](./images/NWS_graph.jpeg)
+
+> [!IMPORTANT]
+> How to run species competition on a small-world graph?
+```ruby
+   from EcoGT_methods import *
+   p0, p1, fB = SC_on_NWSgraph(N, p, k, t, alpha = {"A":α12, "B":α21})
 ```
 
-</details>
+
+### Graphs with ring topology
+
+![alt text](./images/ring_graph.jpeg)
+
+> [!IMPORTANT]
+> How to run species competition on a graph with ring topology?
+```ruby
+   from EcoGT_methods import *
+   p0, p1, fB = SC_on_NWSgraph(N, p=0, k=2, t, alpha = {"A":α12, "B":α21})
+```
+
+## The effect of random rewiring on species competition
+
+When considering ecological competition in the wild, many instances would entail the movement of
+individuals during the competition, as undirected or directed movements in response to biotic or
+abiotic factors in the environment. Thus far, we have only considered competition over topologies
+that are fixed at the start of competition, reflecting random placement of individuals of competing
+species in space.  We can include the movement of organisms during competition by allowing for the
+rewiring of edges during the simulation. 
+
+Given the variety of locomotion in biology, e.g., passive, active, etc., one can conceive a
+multitude of ways of implementing edge rewiring in the EcoGT framework.
+
+### Uniform rewiring 
+In this method, $m$ edges are randomly rewired at each step. This method approximates passive
+locomotion and random walk.
+
+![alt text](./images/UR_graph.jpeg)
+
+> [!IMPORTANT]
+> How to run species competition on a graph with uniform rewiring?
+```ruby
+   from EcoGT_methods import *
+   p0, p1, fB = SC_on_ER_graph_with_UR(N, p, m, t, alpha = {"A":α12, "B":α21})
+```
+> The staring topology is generated using the ER model with $p$ and $m$ is the number of rewired
+> edges per step.
+
+### Rich-gets-richer (RR) rewiring
+In this method, inspired by the preferential
+attachment, specifically the Barab\'{a}si–Albert model, a new edge is formed between
+the randomly chosen node $a$ and node $b$ proportional to $\frac{k_b}{\sum k_j}$, where $k_b$ is the
+degree of node $b$ and $\sum k_j$ is the sum of degrees of all the nodes that are not linked to node
+$a$. In this method, a node with more links is more likely to receive new links during rewiring. This form of rewiring resembles the formation of biological
+clusters such as microbial biofilm.
+
+![alt text](./images/RR_graph.jpeg)
+
+> [!IMPORTANT]
+> How to run species competition on a graph with RR rewiring?
+```ruby
+   from EcoGT_methods import *
+   p0, p1, fB = SC_on_ER_graph_with_PA(N, p, m, t, alpha = {"A":α12, "B":α21},  RR_rewire=True)
+```
+> The staring topology is generated using the ER model with $p$ and $m$ is the number of rewired
+> edges per step.
+
+### Poor-gets-rich (PR) rewiring
+
+A contrast to the RR method, in the PR method, a node
+with fewer links is more likely to receive new links during rewiring. Specifically, a new edge is
+formed between the randomly chosen node $a$ and node $b$ proportional to $\frac{\Delta_b}{\sum
+\Delta_j}$, where $\Delta_b = \mathrm{max}(k_j) - k_b$. This
+method approximates scenarios in which species in community are evenly arranged in space. For
+example, _Pseudomonas aeruginosa_ cells -- in order to better compete -- evenly disperse in
+space to engulf _Agrobacterium tumefaciens_.
+
+![alt text](./images/PR_graph.jpeg)
+
+> [!IMPORTANT]
+> How to run species competition on a graph with PR rewiring?
+```ruby
+   from EcoGT_methods import *
+   p0, p1, fB = SC_on_ER_graph_with_PA(N, p, m, t, alpha = {"A":α12, "B":α21},  RR_rewire=False)
+```
+> The staring topology is generated using the ER model with $p$ and $m$ is the number of rewired
+> edges per step.
+
+### Aggregator rewiring
+In this method, rewiring is done such that an individual of
+species $i$ is more likely to be linked to a conspecific individual during rewiring, $P{i
+\rightarrow i} > P{i\rightarrow j} $.
+
+
+![alt text](./images/agg_graph.jpeg)
+
+> [!IMPORTANT]
+> How to run species competition on a graph with aggregator rewiring?
+```ruby
+   from EcoGT_methods import *
+   p0, p1, fB = SC_on_ER_graph_agg(N, p, m, t, alpha = {"A":α12, "B":α21}, pref={'A':{'A': 4, 'B': 1}, 'B':{'A': 1, 'B': 4}})
+```
+> The staring topology is generated using the ER model with $p$ and $m$ is the number of rewired
+> edges per step. `pref` dictionary determines the strength of preferential rewiring. 
+
+
+### Repulsive rewiring
+
+In this method, rewiring is done such that an individual of
+species $i$ is more likely to be linked to an individual of species $j$ during rewiring, $P{i
+\rightarrow j} > P{i
+\rightarrow i} $. This method could be used to simulate reciprocal interactions in
+which both species prefer to interact with an allospecific individual, for example symmetrical
+intraguild predation, where both species prey on each other.
+
+![alt text](./images/rep_graph.jpeg)
+
+> [!IMPORTANT]
+> How to run species competition on a graph with repulsive rewiring?
+```ruby
+   from EcoGT_methods import *
+   p0, p1, fB = SC_on_ER_graph_agg(N, p, m, t, alpha = {"A":α12, "B":α21}, pref={'A':{'A': 1, 'B': 4}, 'B':{'A': 4, 'B': 1}})
+```
+> The staring topology is generated using the ER model with $p$ and $m$ is the number of rewired
+> edges per step. `pref` dictionary determines the strength of preferential rewiring. 
