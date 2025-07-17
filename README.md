@@ -1,5 +1,10 @@
 # Ecological Graph Theory (EcoGT)
 
+> [!NOTE]
+> The methodology presented here are described in _Ecological graph theory: simulating competition
+> and coexistence on graphs_ by Ata Kalirad and Ralf J. Sommer, accepted for publication in **Methods in Ecology and Evolution**. The
+> citation and link will be added upon publication.
+
 Understanding the mechanisms behind the coexistence of multiple species in an ecological community -- instead of
 competitive exclusion -- remains a central research program in ecology. The competitive
 Lotka–Volterra (LV) equations remains the most widely used and analyzed approach to explore the
@@ -278,3 +283,19 @@ intraguild predation, where both species prey on each other.
 ```
 > The staring topology is generated using the ER model with $p$ and $m$ is the number of rewired
 > edges per step. `pref` dictionary determines the strength of preferential rewiring. 
+
+> [!NOTE]
+> Each topology influences the possibility of coexistence for a combination of $\alpha_{12}$ and
+> $\alpha_{21}$. We have explored this aspect in depth in the manuscript associated with this repository.
+
+
+# FAQ
+
+### What libraries do I need to generate the results presented in the paper?
+
+The results presented here and found in the manuscript were generated using the following libraries:
+```ruby
+Python version : 3.13.3
+networkx       : 3.4.2
+numpy          : 2.2.5
+```
