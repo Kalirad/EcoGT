@@ -40,7 +40,8 @@ interspecific competition:
    test.simulate(time)
    output = pd.DataFrame.from_dict(test.init_cond)
 ```
-
+> `N1_0` and `N2_0` are the initial number of species 1 and 2, respectively. `k` is the carrying
+> capacity, assuming $K_1 = K_2$.
 
 
 The stochastic version of the LV model addresses the lack of _stochasticity_, specifically
@@ -59,8 +60,7 @@ event.
 To recreate the random birth and the density-dependent death in the LV model on a graph, the
 population dynamics in EcoGT consists of two steps:
 
-- **Connectivity-based death:** Individual $a$ of species $i$ dies with probability $
-\frac{n_i + \alpha_{ij} n_j}{n_t}$, where $n_t$ is the total number of nodes linked in the graph to
+- **Connectivity-based death:** Individual $a$ of species $i$ dies with probability $\frac{n_i + \alpha_{ij} n_j}{n_t}$, where $n_t$ is the total number of nodes linked in the graph to
 individual $a$. This condition results in death events that are a function of local
 density. The probability of death is purely a function of the composition of the nodes
 connected to the focal node.
@@ -79,8 +79,7 @@ well-mixed - in the sense of all-to-all interactions - and it does:
    p0, p1, fB = SC_on_comp_graph(N, t, alpha = {"A":α12, "B":α21})
 ```
 
-
-In this single simulation of EcoGT on a complete graph with $N=50$ nodes and $\alpha_{12} =
+>In this single simulation of EcoGT, two species competed on a complete graph with $N=50$ nodes and $\alpha_{12} =
 \alpha_{21} = 0.5$. 
 
 > [!NOTE]
@@ -295,7 +294,7 @@ intraguild predation, where both species prey on each other.
 
 The results presented here and found in the manuscript were generated using the following libraries:
 ```ruby
-Python version : 3.13.3
-networkx       : 3.4.2
-numpy          : 2.2.5
+Python   : 3.13.3
+networkx : 3.4.2
+numpy    : 2.2.5
 ```
