@@ -60,7 +60,7 @@ event.
 To recreate the random birth and the density-dependent death in the LV model on a graph, the
 population dynamics in EcoGT consists of two steps:
 
-- **Connectivity-based death:** Individual $a$ of species $i$ dies with probability $\frac{n_i + \alpha_{ij} n_j}{n_t}$, where $n_t$ is the total number of nodes linked in the graph to
+- **Connectivity-based death:** Individual $a$ of species $i$ dies with probability proportional to $\frac{n_i + \alpha_{ij} n_j}{n_t}$, where $n_t$ is the total number of nodes linked in the graph to
 individual $a$. This condition results in death events that are a function of local
 density. The probability of death is purely a function of the composition of the nodes
 connected to the focal node.
