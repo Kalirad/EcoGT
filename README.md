@@ -1,9 +1,8 @@
 # Ecological Graph Theory (EcoGT)
 
 > [!NOTE]
-> The methodology presented here is described in depth in _Ecological graph theory: simulating competition
-> and coexistence on graphs_ by Ata Kalirad and Ralf J. Sommer, accepted for publication in **Methods in Ecology and Evolution**. The
-> citation and link will be added upon publication.
+> The methodology presented here is described in depth in Kalirad, A., & Sommer, R. J. (2025). Ecological graph theory: Simulating competition and coexistence on graphs. _Methods in Ecology and 
+> Evolution_, 00, 1–14. https://doi.org/10.1111/2041-210X.70121
 
 Understanding the mechanisms behind the coexistence of multiple species in an ecological community -- instead of
 competitive exclusion -- remains a central research program in ecology. The competitive
